@@ -48,9 +48,11 @@ export function App() {
           onSelectClaim={handleSelectClaim}
         />
 
-        {/* 5. Spatial Evidence Map Placeholder Panel */}
+        {/* 5. Spatial Evidence Map / Map Explorer Workspace */}
         <MapPreview
+          claims={mockClaims}
           selectedClaim={selectedClaim}
+          onSelectClaim={handleSelectClaim}
           onOpenExplorer={handleOpenMapExplorer}
         />
 
