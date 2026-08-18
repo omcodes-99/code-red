@@ -84,3 +84,21 @@ export interface MapLayerState {
   potentialConflict: boolean;
 }
 
+export type AppRoute = 
+  | '/'
+  | '/about'
+  | '/how-it-works'
+  | '/login'
+  | '/dashboard'
+  | '/claim'
+  | '/analysis'
+  | '/help'
+  | '/track';
+
+export interface NavItem {
+  id: string;
+  label: string;
+  labelHi?: string;
+  href: AppRoute;
+  badge?: string;
+}
