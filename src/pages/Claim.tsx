@@ -3,17 +3,18 @@ import { useNavigation } from '../router';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { Input, Select } from '../components/common/Input';
-import { Alert } from '../components/common/Alert';
 import { Badge } from '../components/common/Badge';
+import { buildClaimDraftFromForm, saveClaimDraft } from '../utils/claimDraftStore';
 
 export const Claim: React.FC = () => {
   const { navigate } = useNavigation();
   const [claimType, setClaimType] = useState('IFR');
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    const draft = buildClaimDraftFromForm(e.currentTarget);
+    saveClaimDraft(draft);
+    navigate('/claim/boundary');
   };
 
   return (
@@ -42,22 +43,7 @@ export const Claim: React.FC = () => {
           </p>
         </div>
 
-        {submitted ? (
-          <div className="submission-success-box">
-            <Alert type="success" title="Claim Profile Draft Registered (Demo)">
-              Your demonstration claim reference is <strong>FRA-2025-007</strong>. You can now attach supporting geospatial coordinates, elder witness affidavits, or cadastral maps.
-            </Alert>
-            <div className="mt-4 flex gap-3">
-              <Button variant="primary" onClick={() => setSubmitted(false)}>
-                Submit Another Claim
-              </Button>
-              <Button variant="secondary" onClick={() => navigate('/dashboard')}>
-                View in Claims Dashboard
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="claim-form-layout">
+        <form onSubmit={handleSubmit} className="claim-form-layout">
             <Card
               title="1. Claimant & Community Information"
               subtitle="Statutory identity under FRA 2006"
@@ -163,7 +149,6 @@ export const Claim: React.FC = () => {
               </Button>
             </div>
           </form>
-        )}
       </div>
     </div>
   );

@@ -2911,3 +2911,39 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Phase 2 — Claim boundary Leaflet map (scoped; does not restyle Phase 1) */
+.claim-boundary-map-wrap {
+  width: 100%;
+  height: min(58vh, 520px);
+  min-height: 280px;
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  background: var(--gov-navy-900);
+}
+
+.claim-boundary-map-wrap .leaflet-container,
+.claim-boundary-map {
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+  background: #0c2340;
+}
+
+.claim-boundary-map-wrap .leaflet-control-zoom a {
+  color: var(--gov-navy-900);
+}
+
+.claim-boundary-map-wrap .leaflet-control-attribution {
+  font-size: 0.68rem;
+}
+
+@media (max-width: 640px) {
+  .claim-boundary-map-wrap {
+    height: min(50vh, 380px);
+    min-height: 240px;
+  }
+}

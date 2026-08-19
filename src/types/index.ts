@@ -91,6 +91,7 @@ export type AppRoute =
   | '/login'
   | '/dashboard'
   | '/claim'
+  | '/claim/boundary'
   | '/analysis'
   | '/help'
   | '/track';

@@ -3,6 +3,7 @@ export * from './About';
 export * from './HowItWorksPage';
 export * from './Dashboard';
 export * from './Claim';
+export * from './ClaimBoundary';
 export * from './Analysis';
 export * from './Login';
 export * from './Help';

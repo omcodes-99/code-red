@@ -36,7 +36,7 @@ export const Dashboard: React.FC = () => {
               </span>
               <div className="dashboard-badge">
                 <span className="live-pulse" />
-                <span>Pilot Verification: Sambalpur & Mayurbhanj (Odisha)</span>
+                <span>Plot Verification: Sambalpur & Mayurbhanj (Odisha)</span>
               </div>
             </div>
             <h1 className="dashboard-title">Claims & Evidence Dashboard</h1>

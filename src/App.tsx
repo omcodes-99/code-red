@@ -8,6 +8,7 @@ import {
   HowItWorksPage,
   Dashboard,
   Claim,
+  ClaimBoundary,
   Analysis,
   Login,
   Help,
@@ -31,6 +32,8 @@ const AppRoutes: React.FC = () => {
         return <HowItWorksPage />;
       case '/dashboard':
         return <Dashboard />;
+      case '/claim/boundary':
+        return <ClaimBoundary />;
       case '/claim':
         return <Claim />;
       case '/analysis':
