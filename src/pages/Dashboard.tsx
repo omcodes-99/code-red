@@ -30,15 +30,21 @@ export const Dashboard: React.FC = () => {
       <div className="dashboard-top-bar">
         <div className="gov-container dashboard-header-content">
           <div>
-            <div className="dashboard-badge">
-              <span className="live-pulse" />
-              <span>Pilot District: Sambalpur & Mayurbhanj (Odisha)</span>
+            <div className="dashboard-badges-row">
+              <span className="gov-dept-pill">
+                MINISTRY OF TRIBAL AFFAIRS • GOVT. OF INDIA
+              </span>
+              <div className="dashboard-badge">
+                <span className="live-pulse" />
+                <span>Pilot Verification: Sambalpur & Mayurbhanj (Odisha)</span>
+              </div>
             </div>
             <h1 className="dashboard-title">Claims & Evidence Dashboard</h1>
             <p className="dashboard-subtitle">
-              Integrated spatial overview, evidentiary confidence metrics, and claim register for SDLC/DLC review.
+              Integrated spatial overview, evidentiary confidence metrics, and claim register for SDLC/DLC decision support.
             </p>
           </div>
+
 
           <div className="dashboard-actions">
             <Button
