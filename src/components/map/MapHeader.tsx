@@ -14,19 +14,20 @@ export const MapHeader: React.FC<MapHeaderProps> = ({ selectedClaim }) => {
           Spatial Evidence Map
         </h2>
         <p className="section-subtext">
-          Multi-layer cadastral and satellite land-use evidence visualizer
+          Multi-layer geospatial evidence visualizer for FRA claim verification
         </p>
       </div>
 
       <div className="map-header-location">
         <div className="location-pill" title="Pilot Verification Zone">
           <span className="location-pin" aria-hidden="true">📍</span>
-          <span>{selectedClaim.district}, Odisha</span>
+          <span>{selectedClaim.district || 'Sambalpur'}, Odisha</span>
         </div>
         <span className="demo-data-badge" title="Demonstration GIS Prototype Data Only">
-          Demo GIS Data
+          DEMO GIS DATA
         </span>
       </div>
     </div>
   );
 };
+

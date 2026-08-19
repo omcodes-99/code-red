@@ -12,15 +12,14 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
   const forestOverlap = assessment ? assessment.forestOverlapHectares : (claimArea * 0.76);
   const protectedOverlap = assessment ? assessment.protectedAreaOverlapHectares : 0.00;
   const potentialConflict = assessment ? assessment.potentialConflictHectares : 0.12;
-  const boundaryConfidence = assessment ? assessment.boundaryConfidence : 'High';
-  const confidenceMargin = assessment ? assessment.confidenceMargin : '±3.2m';
+  const evidenceQuality = claim.evidenceStatus || 'Moderate';
 
   const summaryCards = [
     {
       id: 'claim-area',
       title: 'Claim Area',
       value: `${claimArea.toFixed(2)} ha`,
-      subtext: `Plot extent for ${claim.id}`,
+      subtext: `Demarcated plot for ${claim.id}`,
       badgeText: claim.claimType === 'Individual (IFR)' ? 'IFR Parcel' : 'CFR Area',
       colorTheme: 'blue',
       icon: (
@@ -33,7 +32,7 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
     },
     {
       id: 'forest-overlap',
-      title: 'Forest Overlap',
+      title: 'Forest/LULC Overlap',
       value: `${forestOverlap.toFixed(2)} ha`,
       subtext: 'Forest land boundary intersection',
       badgeText: 'Customary Forest',
@@ -48,8 +47,8 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
       id: 'protected-area',
       title: 'Protected Area Overlap',
       value: `${protectedOverlap.toFixed(2)} ha`,
-      subtext: 'Sanctuary or Core Reserve overlap',
-      badgeText: protectedOverlap === 0 ? 'Nil Overlap' : 'Buffer Alert',
+      subtext: 'Sanctuary or Core Reserve intersection',
+      badgeText: protectedOverlap === 0 ? 'Nil Overlap' : 'Attention Required',
       colorTheme: protectedOverlap === 0 ? 'green' : 'red',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -61,8 +60,8 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
       id: 'potential-conflict',
       title: 'Potential Conflict',
       value: `${potentialConflict.toFixed(2)} ha`,
-      subtext: 'Boundary dispute or buffer zone',
-      badgeText: potentialConflict > 0.2 ? 'Review Required' : potentialConflict > 0 ? 'Minor Buffer' : 'Clear',
+      subtext: 'Dispute zone or buffer intersection',
+      badgeText: potentialConflict > 0.2 ? 'Attention Required' : potentialConflict > 0 ? 'Buffer Overlap' : 'Clear',
       colorTheme: potentialConflict > 0.2 ? 'red' : potentialConflict > 0 ? 'amber' : 'green',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -73,12 +72,12 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
       ),
     },
     {
-      id: 'boundary-confidence',
-      title: 'Boundary Confidence',
-      value: boundaryConfidence,
-      subtext: `DGPS tolerance ${confidenceMargin}`,
-      badgeText: 'High Fidelity',
-      colorTheme: 'blue',
+      id: 'evidence-quality',
+      title: 'Evidence Quality',
+      value: evidenceQuality,
+      subtext: 'Composite radiometric & spatial score',
+      badgeText: evidenceQuality === 'Strong' ? 'High Fidelity' : evidenceQuality === 'Moderate' ? 'Verified' : 'Under Review',
+      colorTheme: evidenceQuality === 'Strong' ? 'green' : evidenceQuality === 'Moderate' ? 'blue' : 'amber',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
@@ -91,7 +90,7 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
   return (
     <div className="spatial-summary-section" aria-label="Spatial Analysis Summary Cards">
       <div className="spatial-summary-header">
-        <h4 className="spatial-summary-title">Spatial Analysis Key Parameters</h4>
+        <h4 className="spatial-summary-title">Spatial Analysis Summary</h4>
         <span className="spatial-summary-tag">Geospatial Overlay Summary</span>
       </div>
 
@@ -117,3 +116,4 @@ export const SpatialSummary: React.FC<SpatialSummaryProps> = ({ claim }) => {
     </div>
   );
 };
+

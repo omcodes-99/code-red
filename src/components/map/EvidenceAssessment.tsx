@@ -40,9 +40,11 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
       case 'Moderate':
         return <span className="status-badge badge-evidence-moderate">Moderate</span>;
       default:
-        return <span className="status-badge badge-review-alert">Needs Scrutiny</span>;
+        return <span className="status-badge badge-review-alert">Attention Required</span>;
     }
   };
+
+  const isProtectedOverlapZero = assessment.protectedAreaOverlapHectares === 0;
 
   return (
     <div className="spatial-evidence-assessment-card" aria-label="Spatial Evidence Assessment Panel">
@@ -57,7 +59,7 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
         </div>
         <div className="assessment-status-pill">
           <span className="pill-dot"></span>
-          <span>Automated Assessment</span>
+          <span>Decision Support Aid</span>
         </div>
       </div>
 
@@ -80,7 +82,7 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
         <div className="assessment-metric-card">
           <div className="metric-header-row">
             <span className="metric-title">Land-use Consistency</span>
-            <span className="status-badge badge-evidence-strong">Verified</span>
+            <span className="status-badge badge-evidence-strong">Strong</span>
           </div>
           <div className="metric-main-value text-green">
             {assessment.landUseConsistency}
@@ -94,7 +96,7 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
         <div className="assessment-metric-card">
           <div className="metric-header-row">
             <span className="metric-title">Satellite Evidence</span>
-            <span className="status-badge badge-review-ready">Archive Active</span>
+            <span className="status-badge badge-review-ready">Available</span>
           </div>
           <div className="metric-main-value text-navy">
             {assessment.satelliteEvidence}
@@ -122,12 +124,12 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
         <div className="assessment-metric-card">
           <div className="metric-header-row">
             <span className="metric-title">Protected Area Overlap</span>
-            <span className={`status-badge ${assessment.protectedAreaOverlapHectares === 0 ? 'badge-evidence-strong' : 'badge-review-alert'}`}>
-              {assessment.protectedAreaOverlapHectares === 0 ? 'Clear (0 ha)' : 'Overlap Alert'}
+            <span className={`status-badge ${isProtectedOverlapZero ? 'badge-evidence-strong' : 'badge-review-alert'}`}>
+              {isProtectedOverlapZero ? 'None' : 'Attention Required'}
             </span>
           </div>
-          <div className={`metric-main-value font-mono ${assessment.protectedAreaOverlapHectares === 0 ? 'text-green' : 'text-red'}`}>
-            {assessment.protectedAreaOverlapHectares === 0 ? 'None (0.00 ha)' : `${assessment.protectedAreaOverlapHectares.toFixed(2)} ha`}
+          <div className={`metric-main-value font-mono ${isProtectedOverlapZero ? 'text-green' : 'text-red'}`}>
+            {isProtectedOverlapZero ? 'None' : `${assessment.protectedAreaOverlapHectares.toFixed(2)} ha`}
           </div>
           <p className="metric-desc">
             Zero intersection with Core Tiger Reserve or Wildlife Sanctuary boundaries.
@@ -139,11 +141,11 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
           <div className="metric-header-row">
             <span className="metric-title">Potential Conflict</span>
             <span className={`status-badge ${assessment.potentialConflictHectares > 0.3 ? 'badge-review-alert' : assessment.potentialConflictHectares > 0 ? 'badge-evidence-moderate' : 'badge-evidence-strong'}`}>
-              {assessment.potentialConflictHectares > 0.3 ? 'Attention Required' : assessment.potentialConflictHectares > 0 ? 'Minor Buffer' : 'No Conflict'}
+              {assessment.potentialConflictHectares > 0.3 ? 'Attention Required' : assessment.potentialConflictHectares > 0 ? 'Moderate' : 'Strong'}
             </span>
           </div>
-          <div className={`metric-main-value font-mono ${assessment.potentialConflictHectares > 0.2 ? 'text-red' : 'text-amber'}`}>
-            {assessment.potentialConflictHectares.toFixed(2)} ha
+          <div className={`metric-main-value font-mono ${assessment.potentialConflictHectares > 0.2 ? 'text-red' : assessment.potentialConflictHectares > 0 ? 'text-amber' : 'text-green'}`}>
+            {assessment.potentialConflictHectares > 0 ? `${assessment.potentialConflictHectares.toFixed(2)} ha` : 'None (0.00 ha)'}
           </div>
           <p className="metric-desc">
             Boundary buffer intersection with {assessment.forestCompartmentNo}.
@@ -152,11 +154,12 @@ export const EvidenceAssessment: React.FC<EvidenceAssessmentProps> = ({ claim })
       </div>
 
       <div className="assessment-footer-note">
-        <span className="note-icon">⚖️</span>
+        <span className="note-icon" aria-hidden="true">ℹ️</span>
         <p>
-          <strong>Statutory Protocol:</strong> These spatial metrics are generated for demonstration and decision support. Final determinations are subject to Sub-Divisional Committee (SDLC) verification and Gram Sabha resolution under the Forest Rights Act, 2006.
+          These indicators are supporting evidence for human verification and do not determine legal eligibility.
         </p>
       </div>
     </div>
   );
 };
+

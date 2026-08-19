@@ -19,7 +19,8 @@ export const ActiveClaimPopup: React.FC<ActiveClaimPopupProps> = ({
       <div className="popup-header">
         <div className="popup-title-row">
           <span className="popup-status-dot"></span>
-          <span className="popup-claim-id font-mono">{claim.id} (Active Plot)</span>
+          <span className="popup-claim-id font-mono">{claim.id}</span>
+          <span className="popup-active-tag">Active Plot</span>
         </div>
         {onClose && (
           <button
@@ -46,19 +47,25 @@ export const ActiveClaimPopup: React.FC<ActiveClaimPopupProps> = ({
           <div className="info-row">
             <span className="info-label">Extent:</span>
             <span className="info-value text-green font-mono font-bold">
-              {claim.areaHectares.toFixed(2)} ha ({claim.claimType})
+              {claim.areaHectares.toFixed(2)} ha
             </span>
           </div>
           <div className="info-row">
             <span className="info-label">Land-use:</span>
             <span className="info-value text-amber font-semibold">
-              Cultivation Confirmed
+              Cultivation observed
+            </span>
+          </div>
+          <div className="info-row">
+            <span className="info-label">Evidence:</span>
+            <span className={`status-badge badge-evidence-${claim.evidenceStatus.toLowerCase().replace(/\s+/g, '-')}`}>
+              {claim.evidenceStatus}
             </span>
           </div>
           <div className="info-row">
             <span className="info-label">Cadastral Ref:</span>
             <span className="info-value font-mono">
-              {assessment ? assessment.cadastralKhasraNo : 'Khasra Plot'}
+              {claim.khasraNumber || (assessment ? assessment.cadastralKhasraNo : 'Khasra Plot')}
             </span>
           </div>
         </div>
@@ -91,10 +98,11 @@ export const ActiveClaimPopup: React.FC<ActiveClaimPopupProps> = ({
             className="popup-inspect-btn"
             onClick={onInspectDetails}
           >
-            Review Temporal Evidence & Assessment ↓
+            Review Spatial Evidence & Assessment ↓
           </button>
         </div>
       )}
     </div>
   );
 };
+

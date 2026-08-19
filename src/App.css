@@ -1502,6 +1502,137 @@
   font-weight: 600;
 }
 
+/* Temporal Mini Cards Grid */
+.temporal-mini-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.temporal-mini-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.temporal-mini-card:hover {
+  border-color: var(--gov-navy-600);
+  background-color: var(--gov-navy-50);
+}
+
+.temporal-mini-card.active {
+  border-color: var(--gov-navy-800);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1.5px var(--gov-navy-800);
+}
+
+.mini-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-year {
+  font-size: 0.95rem;
+  color: var(--gov-navy-900);
+}
+
+.mini-ndvi {
+  font-size: 0.7rem;
+  color: var(--gov-green-dark);
+  font-weight: 700;
+}
+
+.mini-detection {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-badge {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Map Analysis Dual Grid Layout: Layers + Spatial Evidence Assessment */
+.map-analysis-dual-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.map-dual-col-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-dual-col-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Popup Active Tag */
+.popup-active-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background-color: var(--gov-green-light);
+  color: var(--gov-green-dark);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+/* Important Legal Disclaimer Card */
+.map-legal-disclaimer-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-left: 4px solid var(--gov-saffron);
+  border-radius: 4px;
+  padding: 1.15rem 1.35rem;
+  box-shadow: var(--shadow-sm);
+  margin-top: 1.5rem;
+}
+
+.map-legal-disclaimer-card .disclaimer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.map-legal-disclaimer-card .disclaimer-icon {
+  font-size: 1.15rem;
+}
+
+.map-legal-disclaimer-card .disclaimer-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--gov-navy-900);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.map-legal-disclaimer-card .disclaimer-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+
 /* ==========================================================================
    7. DOMAIN STATS, CLAIMS TABLE & EVIDENCE CARDS
    ========================================================================== */
@@ -2670,10 +2801,15 @@
     grid-template-columns: 1fr;
   }
 
+  .map-analysis-dual-grid {
+    grid-template-columns: 1fr;
+  }
+
   .map-sidebar-layers {
     border-left: none;
     border-top: 1px solid var(--border-medium);
   }
+
 
   .claim-meta-grid {
     grid-template-columns: repeat(4, 1fr);
