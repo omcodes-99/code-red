@@ -2947,3 +2947,198 @@
     min-height: 240px;
   }
 }
+
+/* Phase 3A — Spatial Analysis Leaflet & Metric Controls (scoped) */
+.spatial-layer-controls-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--bg-light, #f8fafc);
+  border: 1px solid var(--border-medium, #cbd5e1);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.spatial-layer-controls-strip .controls-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gov-navy-900, #0c2340);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.spatial-layer-controls-strip .controls-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.layer-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid var(--border-medium, #cbd5e1);
+  background-color: #ffffff;
+  color: var(--text-dark, #1e293b);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.layer-toggle-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.layer-toggle-btn .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.spatial-map-legend-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--bg-white, #ffffff);
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: 4px;
+  margin-top: 0.75rem;
+}
+
+.spatial-map-legend-bar .legend-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gov-navy-900, #0c2340);
+}
+
+.spatial-map-legend-bar .legend-items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.spatial-map-legend-bar .legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-muted, #475569);
+  font-weight: 500;
+}
+
+.legend-color-box {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.legend-color-box.bg-navy { background-color: #0c2340; }
+.legend-color-box.border-amber { border: 2px solid #f59e0b; }
+.legend-color-box.bg-forest { background-color: #16a34a; }
+.legend-color-box.bg-protected { background-color: #ea580c; }
+.legend-color-box.bg-agri { background-color: #ca8a04; }
+.legend-color-box.bg-water { background-color: #0284c7; }
+
+/* Dynamic Result Cards Grid */
+.spatial-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.spatial-result-card {
+  background: #ffffff;
+  border: 1px solid var(--border-medium, #cbd5e1);
+  border-top: 3px solid var(--gov-navy-900, #0c2340);
+  border-radius: 4px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.spatial-result-card.card-forest { border-top-color: #16a34a; }
+.spatial-result-card.card-protected { border-top-color: #ea580c; }
+.spatial-result-card.card-agri { border-top-color: #ca8a04; }
+.spatial-result-card.card-water { border-top-color: #0284c7; }
+
+.spatial-result-card .result-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted, #64748b);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+
+.spatial-result-card .result-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gov-navy-900, #0c2340);
+  line-height: 1.2;
+}
+
+.spatial-result-card .result-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+}
+
+.spatial-result-card .result-pct {
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.result-pct.pct-green { background-color: #dcfce7; color: #15803d; }
+.result-pct.pct-amber { background-color: #fef3c7; color: #b45309; }
+.result-pct.pct-blue { background-color: #e0f2fe; color: #0369a1; }
+.result-pct.pct-gray { background-color: #f1f5f9; color: #475569; }
+
+/* Overlaps Table */
+.spatial-overlap-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.spatial-overlap-table th {
+  background-color: var(--bg-light, #f8fafc);
+  color: var(--gov-navy-900, #0c2340);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 2px solid var(--border-medium, #cbd5e1);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.spatial-overlap-table td {
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid var(--border-light, #e2e8f0);
+  color: var(--text-dark, #1e293b);
+  vertical-align: middle;
+}
+
+.spatial-overlap-table tr:hover td {
+  background-color: #f8fafc;
+}
+

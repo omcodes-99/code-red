@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "name": "sambalpur_demo_agriculture",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "metadata": {
+    "disclaimer": "Prototype / Synthetic GIS Data - Not an official government dataset",
+    "region": "Sambalpur Demonstration Area, Odisha",
+    "center": [83.9784, 21.4678]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "AGR-SBP-104",
+        "name": "Customary Agrarian & Traditional Cultivation Patch",
+        "category": "Agriculture Overlap",
+        "type": "Traditional Settled Cultivation",
+        "datasetType": "Prototype / Synthetic GIS Data",
+        "source": "BhoomiDrishti Prototype Spatial Engine",
+        "color": "#ca8a04"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [83.974, 21.463],
+            [83.9825, 21.4635],
+            [83.9835, 21.468],
+            [83.9805, 21.4715],
+            [83.976, 21.471],
+            [83.973, 21.467],
+            [83.974, 21.463]
+          ]
+        ]
+      }
+    }
+  ]
+}

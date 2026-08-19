@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "name": "sambalpur_demo_water",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "metadata": {
+    "disclaimer": "Prototype / Synthetic GIS Data - Not an official government dataset",
+    "region": "Sambalpur Demonstration Area, Odisha",
+    "center": [83.9784, 21.4678]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "WAT-SBP-019",
+        "name": "Village Stream & Drainage Buffer Corridor",
+        "category": "Water Overlap",
+        "bufferMeters": 30,
+        "datasetType": "Prototype / Synthetic GIS Data",
+        "source": "BhoomiDrishti Prototype Spatial Engine",
+        "color": "#0284c7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [83.9788, 21.476],
+            [83.9802, 21.4762],
+            [83.981, 21.471],
+            [83.9798, 21.4665],
+            [83.9815, 21.461],
+            [83.98, 21.4608],
+            [83.9785, 21.466],
+            [83.9795, 21.4712],
+            [83.9788, 21.476]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -246,18 +246,39 @@ export const ClaimBoundary: React.FC = () => {
             </div>
 
             <div className="form-submit-actions">
-              <Button
-                type="button"
-                variant="primary"
-                size="lg"
-                onClick={handleSubmit}
-                disabled={!canSubmit}
-              >
-                Submit Boundary
-              </Button>
-              <Button variant="ghost" size="lg" onClick={() => navigate('/claim')}>
-                Return to Claim Form
-              </Button>
+              {isSubmitted && draft ? (
+                <>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="lg"
+                    onClick={() => navigate(`/analysis?claimId=${encodeURIComponent(draft.id)}`)}
+                  >
+                    Proceed to Geospatial Evidence Analysis
+                  </Button>
+                  <Button variant="secondary" size="lg" onClick={() => navigate('/dashboard')}>
+                    View in Dashboard
+                  </Button>
+                  <Button variant="ghost" size="lg" onClick={() => navigate('/claim')}>
+                    Return to Claim Form
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="lg"
+                    onClick={handleSubmit}
+                    disabled={!canSubmit}
+                  >
+                    Submit Boundary
+                  </Button>
+                  <Button variant="ghost" size="lg" onClick={() => navigate('/claim')}>
+                    Return to Claim Form
+                  </Button>
+                </>
+              )}
             </div>
           </Card>
         </div>

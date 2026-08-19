@@ -38,10 +38,19 @@ interface BoundaryMapProps {
   onFeatureChange: (feature: ClaimBoundaryFeature | null) => void;
 }
 
+function extractOuterRingLatLngs(polygon: L.Polygon): L.LatLng[] {
+  let latlngs: unknown = polygon.getLatLngs();
+  while (Array.isArray(latlngs) && latlngs.length > 0 && Array.isArray(latlngs[0])) {
+    latlngs = latlngs[0];
+  }
+  return Array.isArray(latlngs) ? (latlngs as L.LatLng[]) : [];
+}
+
 function ringFromPolygon(layer: L.Polygon): number[][] {
-  const latlngs = layer.getLatLngs();
-  const ring = (Array.isArray(latlngs[0]) ? latlngs[0] : latlngs) as L.LatLng[];
-  return ring.map((ll) => [ll.lng, ll.lat]);
+  const points = extractOuterRingLatLngs(layer);
+  return points
+    .filter((ll) => typeof ll?.lat === 'number' && typeof ll?.lng === 'number' && !Number.isNaN(ll.lat) && !Number.isNaN(ll.lng))
+    .map((ll) => [ll.lng, ll.lat]);
 }
 
 function addFeatureToGroup(group: L.FeatureGroup, feature: ClaimBoundaryFeature): L.Polygon {
@@ -71,7 +80,6 @@ const DrawController: React.FC<DrawControllerProps> = ({
   const groupRef = useRef<L.FeatureGroup | null>(null);
   const drawControlRef = useRef<L.Control.Draw | null>(null);
   const polygonDrawerRef = useRef<L.Draw.Polygon | null>(null);
-  const editHandlerRef = useRef<L.EditToolbar.Edit | null>(null);
   const claimIdRef = useRef(claimId);
   const onChangeRef = useRef(onFeatureChange);
 
@@ -96,20 +104,37 @@ const DrawController: React.FC<DrawControllerProps> = ({
     groupRef.current = drawnItems;
     map.addLayer(drawnItems);
 
-    if (initialFeature?.geometry.coordinates[0]?.length) {
+    if (initialFeature?.geometry?.coordinates?.[0]?.length) {
       addFeatureToGroup(drawnItems, initialFeature);
     }
 
     const emitFromGroup = () => {
-      const layers = drawnItems.getLayers();
+      if (!groupRef.current) return;
+      const layers = groupRef.current.getLayers();
       const polygon = layers.find((layer): layer is L.Polygon => layer instanceof L.Polygon);
       if (!polygon) {
         onChangeRef.current(null);
         return;
       }
-      const feature = buildClaimBoundaryFeature(claimIdRef.current, ringFromPolygon(polygon));
+      const ring = ringFromPolygon(polygon);
+      if (ring.length < 3) {
+        onChangeRef.current(null);
+        return;
+      }
+      const feature = buildClaimBoundaryFeature(claimIdRef.current, ring);
       onChangeRef.current(feature);
     };
+
+    const attachPolygonEvents = (polygon: L.Polygon) => {
+      polygon.on('edit', emitFromGroup);
+    };
+
+    // Attach listeners to any initial polygon
+    drawnItems.eachLayer((layer) => {
+      if (layer instanceof L.Polygon) {
+        attachPolygonEvents(layer);
+      }
+    });
 
     if (!readOnly) {
       const drawControl = new L.Control.Draw({
@@ -138,9 +163,18 @@ const DrawController: React.FC<DrawControllerProps> = ({
       const created = event as L.DrawEvents.Created;
       const layer = created.layer;
       if (!(layer instanceof L.Polygon)) return;
+
+      // Maintain strictly single-polygon requirement
+      drawnItems.eachLayer((existing) => {
+        if (existing instanceof L.Polygon && (existing as unknown as { editing?: { disable: () => void } }).editing) {
+          (existing as unknown as { editing: { disable: () => void } }).editing.disable();
+        }
+      });
       drawnItems.clearLayers();
+
       drawnItems.addLayer(layer);
       layer.setStyle(POLYGON_STYLE);
+      attachPolygonEvents(layer);
       emitFromGroup();
     };
 
@@ -161,39 +195,52 @@ const DrawController: React.FC<DrawControllerProps> = ({
     const startDraw = () => {
       if (readOnly) return;
       stopDraw();
-      editHandlerRef.current?.disable();
+
+      // Disable any ongoing editing
+      drawnItems.eachLayer((layer) => {
+        if (layer instanceof L.Polygon && (layer as unknown as { editing?: { disable: () => void } }).editing) {
+          (layer as unknown as { editing: { disable: () => void } }).editing.disable();
+        }
+      });
+
       const drawer = new L.Draw.Polygon(map as unknown as L.DrawMap, DRAW_POLYGON_OPTIONS);
       polygonDrawerRef.current = drawer;
       drawer.enable();
     };
 
     const startEdit = () => {
-      if (readOnly || drawnItems.getLayers().length === 0) return;
+      if (readOnly) return;
       stopDraw();
-      editHandlerRef.current?.disable();
-      const handler = new L.EditToolbar.Edit(map as unknown as L.DrawMap, {
-        featureGroup: drawnItems,
-        selectedPathOptions: {
-          dashArray: '10, 10',
-          fill: true,
-          fillOpacity: 0.15,
-        },
-      });
-      editHandlerRef.current = handler;
-      handler.enable();
+
+      const layers = drawnItems.getLayers();
+      const polygon = layers.find((layer): layer is L.Polygon => layer instanceof L.Polygon);
+      if (!polygon) return;
+
+      const polyWithEditing = polygon as unknown as { editing?: { enable: () => void; disable: () => void } };
+      if (polyWithEditing.editing) {
+        polyWithEditing.editing.enable();
+      }
     };
 
     const finishEdit = () => {
-      editHandlerRef.current?.save();
-      editHandlerRef.current?.disable();
-      editHandlerRef.current = null;
+      const layers = drawnItems.getLayers();
+      const polygon = layers.find((layer): layer is L.Polygon => layer instanceof L.Polygon);
+      if (polygon) {
+        const polyWithEditing = polygon as unknown as { editing?: { disable: () => void } };
+        if (polyWithEditing.editing) {
+          polyWithEditing.editing.disable();
+        }
+      }
       emitFromGroup();
     };
 
     const deletePolygon = () => {
       stopDraw();
-      editHandlerRef.current?.disable();
-      editHandlerRef.current = null;
+      drawnItems.eachLayer((layer) => {
+        if (layer instanceof L.Polygon && (layer as unknown as { editing?: { disable: () => void } }).editing) {
+          (layer as unknown as { editing: { disable: () => void } }).editing.disable();
+        }
+      });
       drawnItems.clearLayers();
       onChangeRef.current(null);
     };
@@ -202,7 +249,11 @@ const DrawController: React.FC<DrawControllerProps> = ({
 
     return () => {
       stopDraw();
-      editHandlerRef.current?.disable();
+      drawnItems.eachLayer((layer) => {
+        if (layer instanceof L.Polygon && (layer as unknown as { editing?: { disable: () => void } }).editing) {
+          (layer as unknown as { editing: { disable: () => void } }).editing.disable();
+        }
+      });
       map.off(L.Draw.Event.CREATED, onCreated);
       map.off(L.Draw.Event.EDITED, onEditedOrDeleted);
       map.off(L.Draw.Event.DELETED, onEditedOrDeleted);
@@ -215,7 +266,6 @@ const DrawController: React.FC<DrawControllerProps> = ({
       groupRef.current = null;
       handlersRef.current = null;
     };
-    // initialFeature is applied once when the controller mounts so later draft saves do not reset drawing
   }, [map, readOnly, handlersRef]);
 
   return null;

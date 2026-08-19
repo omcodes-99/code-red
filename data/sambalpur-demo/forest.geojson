@@ -1,0 +1,46 @@
+{
+  "type": "FeatureCollection",
+  "name": "sambalpur_demo_forest",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "metadata": {
+    "disclaimer": "Prototype / Synthetic GIS Data - Not an official government dataset",
+    "region": "Sambalpur Demonstration Area, Odisha",
+    "center": [83.9784, 21.4678]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "FOR-SBP-042",
+        "name": "Reserve Forest Compartment #42 (LULC)",
+        "category": "Forest / LULC",
+        "density": "Moderate Forest Canopy (40–70%)",
+        "datasetType": "Prototype / Synthetic GIS Data",
+        "source": "BhoomiDrishti Prototype Spatial Engine",
+        "color": "#16a34a"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [83.9765, 21.4655],
+            [83.978, 21.4665],
+            [83.9805, 21.467],
+            [83.984, 21.4685],
+            [83.986, 21.472],
+            [83.9845, 21.476],
+            [83.979, 21.477],
+            [83.975, 21.474],
+            [83.9755, 21.469],
+            [83.9765, 21.4655]
+          ]
+        ]
+      }
+    }
+  ]
+}

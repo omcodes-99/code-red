@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "name": "sambalpur_demo_protected_areas",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "metadata": {
+    "disclaimer": "Prototype / Synthetic GIS Data - Not an official government dataset",
+    "region": "Sambalpur Demonstration Area, Odisha",
+    "center": [83.9784, 21.4678]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PA-SBP-007",
+        "name": "Wildlife Sanctuary Eco-Sensitive Buffer",
+        "category": "Protected Area Overlap",
+        "status": "Eco-Sensitive Zone (ESZ) Buffer Fringe",
+        "datasetType": "Prototype / Synthetic GIS Data",
+        "source": "BhoomiDrishti Prototype Spatial Engine",
+        "color": "#ea580c"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [83.968, 21.46],
+            [83.9772, 21.462],
+            [83.9778, 21.466],
+            [83.976, 21.469],
+            [83.971, 21.471],
+            [83.967, 21.468],
+            [83.968, 21.46]
+          ]
+        ]
+      }
+    }
+  ]
+}
