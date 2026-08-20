@@ -29,6 +29,18 @@ export interface ClaimBoundaryRecord {
   updatedAt: string;
 }
 
+export interface HistoricalObservationRecord {
+  year: number;
+  observationLabel: string;
+  notes: string;
+  viewedAt: string;
+  sensor?: string;
+}
+
+export interface HistoricalEvidenceDraft {
+  observations: HistoricalObservationRecord[];
+}
+
 export interface ClaimDraft {
   id: string;
   createdAt: string;
@@ -47,4 +59,5 @@ export interface ClaimDraft {
   longitude: string;
   documents: ClaimDraftDocumentRef[];
   boundary?: ClaimBoundaryRecord;
+  historicalEvidence?: HistoricalEvidenceDraft;
 }

@@ -384,8 +384,15 @@ export const Analysis: React.FC = () => {
                   </Button>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="primary" size="md" onClick={() => navigate('/track')}>
+                  <Button variant="secondary" size="md" onClick={() => navigate('/track')}>
                     Track Statutory Status
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="md"
+                    onClick={() => navigate(`/analysis/historical?claimId=${activeClaimMeta.id}`)}
+                  >
+                    View Historical Satellite Evidence →
                   </Button>
                 </div>
               </div>

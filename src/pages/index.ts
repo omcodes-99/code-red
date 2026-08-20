@@ -5,6 +5,8 @@ export * from './Dashboard';
 export * from './Claim';
 export * from './ClaimBoundary';
 export * from './Analysis';
+export * from './HistoricalEvidence';
+export * from './EvidenceSummaryPlaceholder';
 export * from './Login';
 export * from './Help';
 export * from './Track';

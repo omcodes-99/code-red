@@ -93,6 +93,8 @@ export type AppRoute =
   | '/claim'
   | '/claim/boundary'
   | '/analysis'
+  | '/analysis/historical'
+  | '/analysis/summary'
   | '/help'
   | '/track';
 

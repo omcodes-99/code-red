@@ -1,4 +1,4 @@
-import type { ClaimBoundaryRecord, ClaimDraft } from '../types/claimDraft';
+import type { ClaimBoundaryRecord, ClaimDraft, HistoricalObservationRecord } from '../types/claimDraft';
 
 const ACTIVE_DRAFT_KEY = 'bhoomidrishti.activeClaimDraft';
 const SEQUENCE_KEY = 'bhoomidrishti.claimIdSequence';
@@ -91,4 +91,35 @@ export function buildClaimDraftFromForm(form: HTMLFormElement): ClaimDraft {
     longitude: valueAt(11),
     documents: [],
   };
+}
+
+export function saveHistoricalObservation(
+  claimId: string,
+  observation: HistoricalObservationRecord
+): ClaimDraft | null {
+  const current = getClaimDraft();
+  if (!current || current.id !== claimId) return null;
+
+  const existingObservations = current.historicalEvidence?.observations || [];
+  const index = existingObservations.findIndex((o) => o.year === observation.year);
+
+  let updatedObservations: HistoricalObservationRecord[];
+  if (index >= 0) {
+    updatedObservations = [
+      ...existingObservations.slice(0, index),
+      observation,
+      ...existingObservations.slice(index + 1),
+    ];
+  } else {
+    updatedObservations = [...existingObservations, observation].sort((a, b) => a.year - b.year);
+  }
+
+  const next: ClaimDraft = {
+    ...current,
+    historicalEvidence: {
+      observations: updatedObservations,
+    },
+  };
+  saveClaimDraft(next);
+  return next;
 }
