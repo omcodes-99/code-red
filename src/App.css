@@ -3150,3 +3150,42 @@
   background-color: #f8fafc;
 }
 
+/* Print Media Styles for Evidence Summary Dossier */
+@media print {
+  .gov-header,
+  .gov-footer,
+  .no-print,
+  .banner-breadcrumb,
+  .gov-page-banner,
+  .gov-alert-notice,
+  button,
+  .gov-btn {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  .gov-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .page-content-container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .gov-card {
+    box-shadow: none !important;
+    border: 1px solid #94a3b8 !important;
+    page-break-inside: avoid;
+    margin-bottom: 1rem !important;
+  }
+}
+
+

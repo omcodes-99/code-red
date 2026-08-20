@@ -7,6 +7,7 @@ export * from './ClaimBoundary';
 export * from './Analysis';
 export * from './HistoricalEvidence';
 export * from './EvidenceSummaryPlaceholder';
+export * from './EvidenceSummary';
 export * from './Login';
 export * from './Help';
 export * from './Track';

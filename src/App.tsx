@@ -11,7 +11,7 @@ import {
   ClaimBoundary,
   Analysis,
   HistoricalEvidence,
-  EvidenceSummaryPlaceholder,
+  EvidenceSummary,
   Login,
   Help,
   Track,
@@ -43,7 +43,7 @@ const AppRoutes: React.FC = () => {
       case '/analysis/historical':
         return <HistoricalEvidence />;
       case '/analysis/summary':
-        return <EvidenceSummaryPlaceholder />;
+        return <EvidenceSummary />;
       case '/login':
         return <Login />;
       case '/help':
