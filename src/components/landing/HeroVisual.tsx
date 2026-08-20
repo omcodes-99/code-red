@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const HeroVisual: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
-    <div className="hero-visual-container" aria-label="Geospatial Evidence Analysis Diagram">
+    <div className="hero-visual-container" aria-label={t('visual.aria')}>
       <div className="hero-visual-card">
         {/* Top Visual Toolbar */}
         <div className="visual-top-bar">
@@ -12,10 +15,10 @@ export const HeroVisual: React.FC = () => {
             <span className="dot dot-green" />
           </div>
           <div className="visual-header-title">
-            <span>Spatial Evidence Engine v1.0</span>
+            <span>{t('visual.engine')}</span>
           </div>
           <div className="visual-status-pill">
-            <span className="live-dot" /> Live Overlay
+            <span className="live-dot" /> {t('visual.liveOverlay')}
           </div>
         </div>
 
@@ -26,7 +29,7 @@ export const HeroVisual: React.FC = () => {
             viewBox="0 0 460 280"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-label="Cadastral Map and Satellite Overlay Visualization"
+            aria-label={t('visual.mapAria')}
           >
             <defs>
               {/* Background Grid Pattern */}
@@ -76,7 +79,7 @@ export const HeroVisual: React.FC = () => {
               strokeDasharray="5 4"
             />
             <text x="330" y="45" fill="#475569" fontSize="10" fontFamily="sans-serif" fontWeight="600">
-              Reserved Forest #42
+              {t('visual.reservedForest')}
             </text>
 
             {/* Surrounding Cadastral Parcels */}
@@ -117,7 +120,7 @@ export const HeroVisual: React.FC = () => {
             {/* Map Labels */}
             <rect x="155" y="118" width="105" height="24" rx="4" fill="#0c2340" />
             <text x="207" y="134" fill="#ffffff" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
-              Claim ID: FRA-2025-001
+              {t('visual.claimId')}
             </text>
 
             <rect x="25" y="248" width="130" height="20" rx="3" fill="#ffffff" stroke="#cbd5e1" strokeWidth="0.8" />
@@ -130,16 +133,16 @@ export const HeroVisual: React.FC = () => {
           <div className="floating-metric-card top-right-card">
             <div className="metric-icon-box success">✓</div>
             <div className="metric-text-content">
-              <span className="metric-title">Temporal Continuity</span>
-              <span className="metric-value">Verified (2005–2025)</span>
+              <span className="metric-title">{t('visual.temporalContinuity')}</span>
+              <span className="metric-value">{t('visual.verified')}</span>
             </div>
           </div>
 
           <div className="floating-metric-card bottom-left-card">
             <div className="metric-icon-box navy">🛰️</div>
             <div className="metric-text-content">
-              <span className="metric-title">Cadastral Boundary Match</span>
-              <span className="metric-value">2.43 Hectares (IFR)</span>
+              <span className="metric-title">{t('visual.cadastralBoundaryMatch')}</span>
+              <span className="metric-value">{t('visual.hectares')}</span>
             </div>
           </div>
         </div>
@@ -148,11 +151,11 @@ export const HeroVisual: React.FC = () => {
         <div className="visual-bottom-bar">
           <div className="evidence-pill">
             <span className="pill-dot bg-green" />
-            <span>NDVI Vegetation Baseline: Consistent</span>
+            <span>{t('visual.ndviBaseline')}</span>
           </div>
           <div className="evidence-pill">
             <span className="pill-dot bg-amber" />
-            <span>Gram Sabha Audit: Scheduled</span>
+            <span>{t('visual.gramSabhaAudit')}</span>
           </div>
         </div>
       </div>

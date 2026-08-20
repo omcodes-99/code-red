@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigation } from '../../router';
 import type { NavItem } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 export const Header: React.FC = () => {
   const { currentPath, navigate } = useNavigation();
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems: NavItem[] = [
-    { id: 'home', label: 'Home', labelHi: 'मुख्य पृष्ठ', href: '/' },
-    { id: 'about', label: 'About', labelHi: 'परिचय', href: '/about' },
-    { id: 'how-it-works', label: 'How It Works', labelHi: 'कार्यप्रणाली', href: '/how-it-works' },
-    { id: 'dashboard', label: 'Dashboard', labelHi: 'डैशबोर्ड', href: '/dashboard' },
-    { id: 'help', label: 'Help', labelHi: 'सहायता', href: '/help' },
+    { id: 'home', label: t('nav.home'), href: '/' },
+    { id: 'about', label: t('nav.about'), href: '/about' },
+    { id: 'how-it-works', label: t('nav.howItWorks'), href: '/how-it-works' },
+    { id: 'dashboard', label: t('nav.dashboard'), href: '/dashboard' },
+    { id: 'help', label: t('nav.help'), href: '/help' },
   ];
 
   // Close mobile menu on ESC key
@@ -35,7 +37,7 @@ export const Header: React.FC = () => {
       <div className="gov-main-nav-wrapper">
         <div className="gov-container main-nav-content">
           {/* Official BhoomiDrishti Brand Treatment */}
-          <Link to="/" className="brand-block" aria-label="BhoomiDrishti Home">
+          <Link to="/" className="brand-block" aria-label={t('brand.homeAria')}>
             <div className="brand-logo-icon" aria-hidden="true">
               <svg width="42" height="42" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="22" cy="22" r="21" fill="#0C2340" stroke="#D97706" strokeWidth="2.2" />
@@ -48,14 +50,14 @@ export const Header: React.FC = () => {
             <div className="brand-text">
               <div className="brand-name-row">
                 <span className="brand-name">BhoomiDrishti</span>
-                <span className="prototype-pill">PROTOTYPE</span>
+                <span className="prototype-pill">{t('brand.prototype')}</span>
               </div>
-              <span className="brand-tagline">From Land Claims to Evidence-Based Decisions</span>
+              <span className="brand-tagline">{t('brand.tagline')}</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="primary-navigation desktop-nav" aria-label="Primary Navigation">
+          <nav className="primary-navigation desktop-nav" aria-label={t('nav.primaryAria')}>
             <ul className="nav-list">
               {navItems.map((item) => {
                 const isItemActive =
@@ -87,7 +89,7 @@ export const Header: React.FC = () => {
                 <polyline points="10 17 15 12 10 7" />
                 <line x1="15" y1="12" x2="3" y2="12" />
               </svg>
-              <span>Login</span>
+              <span>{t('nav.login')}</span>
             </button>
           </div>
 
@@ -97,7 +99,7 @@ export const Header: React.FC = () => {
               type="button"
               className={`hamburger-btn ${mobileMenuOpen ? 'open' : ''}`}
               onClick={toggleMobileMenu}
-              aria-label={mobileMenuOpen ? 'Close main menu' : 'Open main menu'}
+              aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
             >
@@ -123,7 +125,7 @@ export const Header: React.FC = () => {
           className="mobile-nav-drawer"
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile Navigation"
+          aria-label={t('nav.mobileAria')}
         >
           <div className="mobile-nav-backdrop" onClick={() => setMobileMenuOpen(false)} aria-hidden="true" />
           <div className="mobile-nav-panel">
@@ -133,7 +135,7 @@ export const Header: React.FC = () => {
                 type="button"
                 className="mobile-close-btn"
                 onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close menu"
+                aria-label={t('nav.closeMenu')}
               >
                 ✕
               </button>
@@ -152,7 +154,6 @@ export const Header: React.FC = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="mobile-nav-label">{item.label}</span>
-                      {item.labelHi && <span className="mobile-nav-label-hi">{item.labelHi}</span>}
                     </Link>
                   </li>
                 );
@@ -168,7 +169,7 @@ export const Header: React.FC = () => {
                   navigate('/login');
                 }}
               >
-                Officer / Claimant Login
+                {t('nav.officerLogin')}
               </button>
             </div>
           </div>

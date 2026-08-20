@@ -2,9 +2,11 @@ import React from 'react';
 import { useNavigation } from '../../router';
 import { HeroVisual } from './HeroVisual';
 import { Button } from '../common/Button';
+import { useTranslation } from 'react-i18next';
 
 export const Hero: React.FC = () => {
   const { navigate } = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <section className="gov-hero-section" aria-labelledby="hero-main-title">
@@ -14,22 +16,22 @@ export const Hero: React.FC = () => {
           {/* Official Sector Badge */}
           <div className="hero-dept-badge">
             <span className="dept-emblem">🏛️</span>
-            <span>Forest Rights Act (FRA 2006) Decision Support Initiative</span>
+            <span>{t('hero.initiative')}</span>
           </div>
 
           {/* Heading */}
           <h1 id="hero-main-title" className="hero-heading-primary">
-            BhoomiDrishti
+            {t('hero.heading')}
           </h1>
 
           {/* Subheading */}
           <h2 className="hero-subheading">
-            From Land Claims to Evidence-Based Decisions
+            {t('hero.subheading')}
           </h2>
 
           {/* Supporting Text */}
           <p className="hero-description">
-            BhoomiDrishti helps transform land-claim information and supporting evidence into structured, transparent and actionable insights. By synthesizing multi-temporal satellite records, cadastral boundary overlays, and documentary submissions, the platform assists public administration committees in making well-informed, evidence-backed assessments.
+            {t('hero.description')}
           </p>
 
           {/* Call to Actions */}
@@ -44,7 +46,7 @@ export const Hero: React.FC = () => {
                 </svg>
               }
             >
-              Start Analysis
+              {t('hero.startAnalysis')}
             </Button>
 
             <Button
@@ -59,7 +61,7 @@ export const Hero: React.FC = () => {
                 </svg>
               }
             >
-              Learn How It Works
+              {t('hero.learnHowItWorks')}
             </Button>
           </div>
 
@@ -67,15 +69,15 @@ export const Hero: React.FC = () => {
           <div className="hero-meta-points">
             <div className="meta-point">
               <span className="point-icon">✓</span>
-              <span>Evidence-Backed Spatial Audit</span>
+              <span>{t('hero.evidenceAudit')}</span>
             </div>
             <div className="meta-point">
               <span className="point-icon">✓</span>
-              <span>Human-in-the-Loop SDLC/DLC Support</span>
+              <span>{t('hero.humanSupport')}</span>
             </div>
             <div className="meta-point">
               <span className="point-icon">✓</span>
-              <span>Transparent Public Administration</span>
+              <span>{t('hero.transparentAdministration')}</span>
             </div>
           </div>
         </div>

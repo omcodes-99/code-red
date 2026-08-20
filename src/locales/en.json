@@ -1,0 +1,53 @@
+{
+  "government": {
+    "title": "भारत सरकार | Government of India",
+    "ministry": "जनजातीय कार्य मंत्रालय | Ministry of Tribal Affairs",
+    "digitalIndia": "Digital India",
+    "officialHeader": "Official Government Header Bar",
+    "languageSelector": "Select portal language",
+    "skipToMain": "Skip to Main Content"
+  },
+  "brand": {
+    "tagline": "From Land Claims to Evidence-Based Decisions",
+    "prototype": "PROTOTYPE",
+    "homeAria": "BhoomiDrishti Home"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "howItWorks": "How It Works",
+    "dashboard": "Dashboard",
+    "help": "Help",
+    "login": "Login",
+    "primaryAria": "Primary Navigation",
+    "mobileAria": "Mobile Navigation",
+    "openMenu": "Open main menu",
+    "closeMenu": "Close main menu",
+    "officerLogin": "Officer / Claimant Login"
+  },
+  "hero": {
+    "initiative": "Forest Rights Act (FRA 2006) Decision Support Initiative",
+    "heading": "BhoomiDrishti",
+    "subheading": "From Land Claims to Evidence-Based Decisions",
+    "description": "BhoomiDrishti helps transform land-claim information and supporting evidence into structured, transparent and actionable insights. By synthesizing multi-temporal satellite records, cadastral boundary overlays, and documentary submissions, the platform assists public administration committees in making well-informed, evidence-backed assessments.",
+    "startAnalysis": "Start Analysis",
+    "learnHowItWorks": "Learn How It Works",
+    "evidenceAudit": "Evidence-Backed Spatial Audit",
+    "humanSupport": "Human-in-the-Loop SDLC/DLC Support",
+    "transparentAdministration": "Transparent Public Administration"
+  },
+  "visual": {
+    "aria": "Geospatial Evidence Analysis Diagram",
+    "engine": "Spatial Evidence Engine v1.0",
+    "liveOverlay": "Live Overlay",
+    "mapAria": "Cadastral Map and Satellite Overlay Visualization",
+    "claimId": "Claim ID: FRA-2025-001",
+    "reservedForest": "Reserved Forest #42",
+    "temporalContinuity": "Temporal Continuity",
+    "verified": "Verified (2005–2025)",
+    "cadastralBoundaryMatch": "Cadastral Boundary Match",
+    "hectares": "2.43 Hectares (IFR)",
+    "ndviBaseline": "NDVI Vegetation Baseline: Consistent",
+    "gramSabhaAudit": "Gram Sabha Audit: Scheduled"
+  }
+}

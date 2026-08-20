@@ -37,7 +37,10 @@
 }
 
 .emblem-placeholder {
-  font-size: 1.15rem;
+  width: 28px;
+  height: 32px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 .gov-titles {
@@ -120,6 +123,7 @@
   font-weight: 500;
   padding: 0.1rem 0.35rem;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
 .lang-btn.active {
@@ -441,6 +445,10 @@
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 2rem;
+}
+
+.hero-cta-actions .btn {
+  white-space: nowrap;
 }
 
 .hero-meta-points {

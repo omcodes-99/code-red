@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
+import emblemOfIndia from '../../assets/emblem-of-india.svg';
 
 interface GovernmentBarProps {
   currentLang?: 'EN' | 'HI';
@@ -6,14 +9,15 @@ interface GovernmentBarProps {
 }
 
 export const GovernmentBar: React.FC<GovernmentBarProps> = ({
-  currentLang = 'EN',
   onLangChange,
 }) => {
-  const [selectedLang, setSelectedLang] = useState<'EN' | 'HI'>(currentLang);
+  const { t } = useTranslation();
   const [fontSizeOffset, setFontSizeOffset] = useState<number>(0);
 
   const handleLangSelect = (lang: 'EN' | 'HI') => {
-    setSelectedLang(lang);
+    const language = lang === 'HI' ? 'hi' : 'en';
+    void i18n.changeLanguage(language);
+    localStorage.setItem('bhoomidrishti-language', language);
     if (onLangChange) {
       onLangChange(lang);
     }
@@ -35,21 +39,19 @@ export const GovernmentBar: React.FC<GovernmentBarProps> = ({
   };
 
   return (
-    <div className="gov-utility-bar" role="region" aria-label="Official Government Header Bar">
+    <div className="gov-utility-bar" role="region" aria-label={t('government.officialHeader')}>
       {/* Skip to Main Content Link for Keyboard Accessibility */}
       <a href="#main-content" className="gov-skip-link">
-        Skip to Main Content
+        {t('government.skipToMain')}
       </a>
 
       <div className="gov-container utility-content">
         {/* Government Identity */}
         <div className="gov-identity-strip">
-          <div className="emblem-placeholder" aria-hidden="true">
-            🏛️
-          </div>
+          <img className="emblem-placeholder" src={emblemOfIndia} alt="State Emblem of India" />
           <div className="gov-titles">
-            <span className="gov-title-hindi">भारत सरकार | Government of India</span>
-            <span className="gov-ministry">जनजातीय कार्य मंत्रालय | Ministry of Tribal Affairs</span>
+            <span className="gov-title-hindi">{t('government.title')}</span>
+            <span className="gov-ministry">{t('government.ministry')}</span>
           </div>
         </div>
 
@@ -58,7 +60,7 @@ export const GovernmentBar: React.FC<GovernmentBarProps> = ({
           {/* Digital India Flagship Tag */}
           <div className="gov-digital-india-tag" title="Digital India Initiative">
             <span className="di-dot" aria-hidden="true" />
-            <span>Digital India</span>
+            <span>{t('government.digitalIndia')}</span>
           </div>
 
           <div className="utility-divider" aria-hidden="true" />
@@ -97,13 +99,13 @@ export const GovernmentBar: React.FC<GovernmentBarProps> = ({
           <div className="utility-divider" aria-hidden="true" />
 
           {/* Language Switcher */}
-          <div className="lang-switcher" role="radiogroup" aria-label="Select portal language">
+          <div className="lang-switcher" role="radiogroup" aria-label={t('government.languageSelector')}>
             <button
               type="button"
-              className={`lang-btn ${selectedLang === 'HI' ? 'active' : ''}`}
+              className={`lang-btn ${i18n.language === 'hi' ? 'active' : ''}`}
               onClick={() => handleLangSelect('HI')}
               role="radio"
-              aria-checked={selectedLang === 'HI'}
+              aria-checked={i18n.language === 'hi'}
               aria-label="हिन्दी में देखें"
             >
               हिन्दी
@@ -111,10 +113,10 @@ export const GovernmentBar: React.FC<GovernmentBarProps> = ({
             <span className="lang-sep" aria-hidden="true">|</span>
             <button
               type="button"
-              className={`lang-btn ${selectedLang === 'EN' ? 'active' : ''}`}
+              className={`lang-btn ${i18n.language !== 'hi' ? 'active' : ''}`}
               onClick={() => handleLangSelect('EN')}
               role="radio"
-              aria-checked={selectedLang === 'EN'}
+              aria-checked={i18n.language !== 'hi'}
               aria-label="View in English"
             >
               English
