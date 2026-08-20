@@ -3,6 +3,7 @@ import { useNavigation } from '../../router';
 import { HeroVisual } from './HeroVisual';
 import { Button } from '../common/Button';
 import { useTranslation } from 'react-i18next';
+import { TreePine } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const { navigate } = useNavigation();
@@ -15,7 +16,7 @@ export const Hero: React.FC = () => {
         <div className="hero-text-column">
           {/* Official Sector Badge */}
           <div className="hero-dept-badge">
-            <span className="dept-emblem">🏛️</span>
+            <span className="dept-emblem"><TreePine size={17} strokeWidth={2} aria-hidden="true" /></span>
             <span>{t('hero.initiative')}</span>
           </div>
 
